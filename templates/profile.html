@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+CS50 Final Project - Profile
+{% endblock %}
+
+{% block pageheader %}
+Profile
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Profile</h4>
+                <p class="card-category">Your complete profile</p>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Fist Name</label>
+                                <input type="text" id="first_name" name="first_name" class="form-control" value="{{ user.first_name }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Last Name</label>
+                                <input type="text" id="last_name" name="last_name" class="form-control" value="{{ user.last_name }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Username</label>
+                                <input type="text" id="username" name="username" class="form-control" value="{{ user.username }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Email address</label>
+                                <input type="email" id="email" name="email" class="form-control" value="{{ user.email }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+CS50 Final Project
+{% endblock %}
+
+{% block pageheader %}
+Dashboard
+{% endblock %}
+
+{% block notifications %}
+<li class="nav-item dropdown">
+    <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <i class="material-icons">notifications</i>
+        <span id="notification_cart_number" class="notification">{{ pending }}</span>
+        <p class="d-lg-none d-md-block"></p>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        {% if pending > 0 %}
+            <a class="dropdown-item" href="#">You have {{ pending }} pending todos</a>
+        {% else %}
+            <a class="dropdown-item" href="#">You don't have any pending todo</a>
+        {% endif %}
+    </div>
+</li>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">store</i>
+                </div>
+                <p class="card-category">Completed</p>
+                <h3 class="card-title">{{ completed }}</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">date_range</i> Completed ToDos
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">info_outline</i>
+                </div>
+                <p class="card-category">Pending</p>
+                <h3 class="card-title">{{ pending }}</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">local_offer</i> Pending ToDos
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

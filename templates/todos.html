@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}
+CS50 Final Project - ToDos
+{% endblock %}
+
+{% block pageheader %}
+ToDos
+{% endblock %}
+
+{% block notifications %}
+<li class="nav-item dropdown">
+    <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <i class="material-icons">notifications</i>
+        <span id="notification_cart_number" class="notification">{{ pending }}</span>
+        <p class="d-lg-none d-md-block"></p>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        {% if pending > 0 %}
+            <a class="dropdown-item" href="#">You have {{ pending }} pending todos</a>
+        {% else %}
+            <a class="dropdown-item" href="#">You don't have any pending todo</a>
+        {% endif %}
+    </div>
+</li>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Add new ToDo</h4>
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+                    <form action="{{ url_for('addtodo') }}" method="post" id="add-todo-form">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Title</label>
+                                    <input type="text" id="todo_title" name="todo_title" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-right">Add ToDo</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">ToDos</h4>
+                <p class="card-category">Your ToDos</p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="todos-table">
+                        <thead class=" text-primary">
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            {% for todo in todos %}
+                            <tr id="todo-row-item-{{ todo.id }}">
+                                <td>{{ todo.id }}</td>
+                                <td>{{ todo.title }}</td>
+                                <td id="todo-item-{{ todo.id }}">{{ todo.status }}</td>
+                                <td>
+                                    <form action="{{ url_for('changetodo') }}" method="POST" id="change-todo-form">
+                                        <input type="hidden" id="todo_id" value="{{ todo.id }}">
+                                        <button class="btn btn-primary btn-fab">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                    </form>
+                                    <form action="{{ url_for('deletetodo') }}" method="POST" id="delete-todo-form">
+                                        <input type="hidden" id="todo_id" value="{{ todo.id }}">
+                                        <button class="btn btn-primary btn-fab">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
